@@ -28,7 +28,7 @@ class Fdsn:
         maxdepth: Optional[float] = None,
         minmagnitude: Optional[float] = None,
         maxmagnitude: Optional[float] = None,
-        limit: Optional[int] = None
+        limit: Optional[int] = None,
     ):
         event_query_url = self.base_url + "/event/1/query"
 
@@ -37,30 +37,30 @@ class Fdsn:
         }
 
         if minlatitude is not None:
-            parameters['minlatitude'] = minlatitude
+            parameters["minlatitude"] = minlatitude
         if maxlatitude is not None:
-            parameters['maxlatitude'] = maxlatitude
+            parameters["maxlatitude"] = maxlatitude
         if minlongitude is not None:
-            parameters['minlongitude'] = minlongitude
+            parameters["minlongitude"] = minlongitude
         if maxlongitude is not None:
-            parameters['maxlongitude'] = maxlongitude
+            parameters["maxlongitude"] = maxlongitude
 
         if starttime is not None:
-            parameters['starttime'] = starttime
+            parameters["starttime"] = starttime
         if endtime is not None:
-            parameters['endtime'] = endtime
+            parameters["endtime"] = endtime
 
         if mindepth is not None:
-            parameters['mindepth'] = mindepth
+            parameters["mindepth"] = mindepth
         if maxdepth is not None:
-            parameters['maxdepth'] = maxdepth
+            parameters["maxdepth"] = maxdepth
         if minmagnitude is not None:
-            parameters['minmagnitude'] = minmagnitude
+            parameters["minmagnitude"] = minmagnitude
         if maxmagnitude is not None:
-            parameters['maxmagnitude'] = maxmagnitude
+            parameters["maxmagnitude"] = maxmagnitude
 
         if limit is not None:
-            parameters['limit'] = limit
+            parameters["limit"] = limit
 
         resp = requests.get(event_query_url, parameters)
         resp.raise_for_status()
