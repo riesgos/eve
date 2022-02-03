@@ -1,0 +1,73 @@
+{
+    "title": "EveProcess",
+    "abstract": "Eve is an alternative earthquake catalogue service - delegating work to FDSN.",
+    "imageId": "eve:latest",
+    "workingDirectory": "/usr/share/git/eve",
+    "commandToExecute": "python3 eve.py --",
+    "exitValueHandler": "logging",
+    "stderrHandler": "pythonTraceback",
+    "input": [
+        {
+            "title": "input-boundingbox",
+            "abstract": "bounding box for spatial search",
+            "useAs": "commandLineArgument",
+            "type": "bbox",
+            "crs": [
+                "EPSG:4326",
+                "EPSG:4328"
+            ]
+        },
+        {
+            "title": "starttime",
+            "abstract": "starttime for the query (UTC)",
+            "useAs": "commandLineArgument",
+            "type": "datetime",
+            "default": "2020-01-01"
+        },
+        {
+            "title": "endtime",
+            "abstract": "endtime for the query (UTC)",
+            "useAs": "commandLineArgument",
+            "type": "datetime",
+            "default": "2020-02-01"
+        },
+        {
+            "title": "mmin",
+            "abstract": "minimum magnitude",
+            "useAs": "commandLineArgument",
+            "type": "double",
+            "default": "6.6"
+        },
+        {
+            "title": "mmax",
+            "abstract": "maximum magnitude",
+            "useAs": "commandLineArgument",
+            "type": "double",
+            "default": "8.5"
+        },
+        {
+            "title": "zmin",
+            "abstract": "minimum depth",
+            "useAs": "commandLineArgument",
+            "type": "double",
+            "default": "5"
+        },
+        {
+            "title": "zmax",
+            "abstract": "maximum depth",
+            "useAs": "commandLineArgument",
+            "type": "double",
+            "default": "140"
+        },
+    ],
+    "output": [
+        {
+            "title": "events",
+            "abstract": "resulting quakeml",
+            "readFrom": "file",
+            "path": "output.xml",
+            "type": "quakeml",
+            "schema": "http://quakeml.org/xmlns/quakeml/1.2/QuakeML-1.2.xsd"
+        }
+    ]
+}
