@@ -58,7 +58,7 @@
             "useAs": "commandLineArgument",
             "type": "double",
             "default": "140"
-        },
+        }
     ],
     "output": [
         {
