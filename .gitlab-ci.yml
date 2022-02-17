@@ -38,8 +38,6 @@ verify_python:
 python_pycodestyle:
   image: python:3.9.10-buster
   stage: test
-  # TODO: fix code to fit with PEP8 guidelines
-  allow_failure: true
   tags:
     - group
   before_script:
@@ -51,8 +49,6 @@ python_pycodestyle:
 python_pylint:
   image: python:3.9.10-buster
   stage: test
-  # TODO: fix code to get a better pylint rating
-  allow_failure: true
   tags:
     - group
   before_script:
