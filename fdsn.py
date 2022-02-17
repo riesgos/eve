@@ -13,7 +13,10 @@ import requests
 
 
 class Fdsn:
+    """Interact with an fdsn web service."""
+
     def __init__(self, base_url: str):
+        """Init the object with the base_url."""
         self.base_url = base_url
 
     def query_events(
@@ -30,6 +33,7 @@ class Fdsn:
         maxmagnitude: Optional[float] = None,
         limit: Optional[int] = None,
     ):
+        """Query events and return the xml text."""
         event_query_url = self.base_url + "/event/1/query"
 
         parameters = {

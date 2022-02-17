@@ -14,31 +14,57 @@ from enum import Enum
 import typer
 
 from fdsn import Fdsn
-
-KNOWN_FDSN_SERVICE_PROVIDER = {"gfz": "https://geofon.gfz-potsdam.de/fdsnws/"}
+from quakeml import to_valid_quakeml
 
 
 class Provider(str, Enum):
-    gfz = "gfz"
+    """Possible provider values for the fdsn service."""
+
+    GFZ = "gfz"
+
+
+KNOWN_FDSN_SERVICE_PROVIDER = {
+    Provider.GFZ: "https://geofon.gfz-potsdam.de/fdsnws/"
+}
 
 
 def main(
     # First the bounding box
     lonmin: float = typer.Argument(
         None,
-        help="The minimum longitude of the search bounding box in decimal degree.",
+        help="".join(
+            [
+                "The minimum longitude of the search bounding ",
+                "box in decimal degree.",
+            ]
+        ),
     ),
     lonmax: float = typer.Argument(
         None,
-        help="The maximum longitude of the search bounding box in decimal degree.",
+        help="".join(
+            [
+                "The maximum longitude of the search ",
+                "bounding box in decimal degree.",
+            ]
+        ),
     ),
     latmin: float = typer.Argument(
         None,
-        help="The minimum latitude of the search bounding box in decimal degree.",
+        help="".join(
+            [
+                "The minimum latitude of the search bounding ",
+                "box in decimal degree.",
+            ]
+        ),
     ),
     latmax: float = typer.Argument(
         None,
-        help="The maximum latitude of the search bounding box in decimal degree.",
+        help="".join(
+            [
+                "The maximum latitude of the search bounding ",
+                "box in decimal degree.",
+            ]
+        ),
     ),
     # Then the time restristions
     starttime: datetime = typer.Argument(
@@ -61,7 +87,7 @@ def main(
     # query all of the catalogue.
     limit: int = typer.Argument(200, help="The limit of events to query."),
     provider: Provider = typer.Argument(
-        Provider.gfz, help="The fdsn provider to query."
+        Provider.GFZ, help="The fdsn provider to query."
     ),
 ):
     """Eve - the **eve**nt catalogue."""
@@ -79,10 +105,11 @@ def main(
         maxmagnitude=mmax,
         limit=limit,
     )
+    events_valid_quakeml = to_valid_quakeml(events)
 
     output_file = "output.xml"
     with open(output_file, "w") as outfile:
-        outfile.write(events)
+        outfile.write(events_valid_quakeml)
 
 
 if __name__ == "__main__":
