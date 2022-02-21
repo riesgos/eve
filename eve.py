@@ -68,10 +68,24 @@ def main(
     ),
     # Then the time restristions
     starttime: datetime = typer.Argument(
-        None, help="The start of the time interval to search for (UTC)."
+        None,
+        help="The start of the time interval to search for (UTC).",
+        formats=[
+            "%Y-%m-%d",
+            "%Y-%m-%dT%H:%M:%S",
+            "%Y-%m-%d %H:%M:%S",
+            "%Y-%m-%dT%H:%M:%S.%fZ",
+        ],
     ),
     endtime: datetime = typer.Argument(
-        None, help="The end of the time interval to search for (UTC)."
+        None,
+        help="The end of the time interval to search for (UTC).",
+        formats=[
+            "%Y-%m-%d",
+            "%Y-%m-%dT%H:%M:%S",
+            "%Y-%m-%d %H:%M:%S",
+            "%Y-%m-%dT%H:%M:%S.%fZ",
+        ],
     ),
     # And then magnitude
     mmin: float = typer.Argument(
