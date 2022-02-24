@@ -1,7 +1,7 @@
 {
     "title": "EveProcess",
     "abstract": "Eve is an alternative earthquake catalogue service - delegating work to FDSN.",
-    "imageId": "eve:latest",
+    "imageId": "gfzriesgos/eve:latest",
     "workingDirectory": "/usr/share/git/eve",
     "commandToExecute": "python3 eve.py --",
     "exitValueHandler": "logging",

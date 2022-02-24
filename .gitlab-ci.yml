@@ -11,20 +11,25 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations under
 # the License.
+
 stages:
   - test
   - build
+
 variables:
   LC_ALL: "C.UTF-8"
   LANG: "C.UTF-8"
+
 cache:
   key: "$CI_COMMIT_REF_SLUG"
   paths:
     - .pip
+
 .install_requirements: &install_requirements
   - DEBIAN_FRONTEND=noninteractive apt-get update && apt-get upgrade -y
   - DEBIAN_FRONTEND=noninteractive apt-get install python3 python3-pip -y
   - pip3 install --cache-dir=.pip -r requirements.txt
+
 verify_python:
   image: python:3.9.10-buster
   stage: test
@@ -67,6 +72,7 @@ python_black:
     - pip3 install --cache-dir=.pip black==21.4b2
   script:
     - black -l 79 --check .
+
 run_tests:
   image: python:3.9.10-buster
   stage: test
@@ -94,10 +100,12 @@ dockerbuild_latest:
     - group
   script:
     - docker build -t eve:latest -f metadata/Dockerfile .
+
     # push latest image to Docker Hub
     - docker tag eve:latest gfzriesgos/eve:latest
     - docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}
     - docker push gfzriesgos/eve:latest
+
     # push latest image to GitLab Container Registry
     - docker tag eve:latest git.gfz-potsdam.de:5000/id2/riesgos/eve:latest
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
