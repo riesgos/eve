@@ -38,6 +38,7 @@ class Fdsn:
 
         parameters = {
             "format": "xml",
+            "magnitudetype": "Mw",
         }
 
         if minlatitude is not None:
