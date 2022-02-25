@@ -5,7 +5,7 @@
     "workingDirectory": "/usr/share/git/eve",
     "commandToExecute": "python3 eve.py --",
     "exitValueHandler": "logging",
-    "stderrHandler": "pythonTraceback",
+    "stderrHandler": "errorIfNotEmpty",
     "input": [
         {
             "title": "input-boundingbox",

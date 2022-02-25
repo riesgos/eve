@@ -8,8 +8,10 @@ The **eve**nt catalogue service.
 A python script to query events from an fdsn service.
 """
 
+import sys
 from datetime import datetime
 from enum import Enum
+from functools import partial
 
 import typer
 
@@ -105,7 +107,28 @@ def main(
     ),
 ):
     """Eve - the **eve**nt catalogue."""
+    print_err = partial(print, file=sys.stderr)
+    die = partial(sys.exit, 1)
+
     fdsn_service = Fdsn(KNOWN_FDSN_SERVICE_PROVIDER[provider])
+
+    if starttime > endtime:
+        print_err(f"Starttime {starttime} is after endtime {endtime}.")
+        print_err(f"There are no such events.")
+        die()
+
+    if mmin > mmax:
+        print_err(
+            f"Minimum magnitude {mmin} is larger than"
+            + f"maximum magnitude {mmax}."
+        )
+        print_err(f"There are no such events.")
+        die()
+    if zmin > zmax:
+        print_err(f"Minimum depth {zmin} is larger than maximum depth {zmax}.")
+        print_err(f"There are no such events.")
+        die()
+
     events = fdsn_service.query_events(
         minlatitude=latmin,
         maxlatitude=latmax,
